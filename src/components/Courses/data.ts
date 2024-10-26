@@ -1,4 +1,6 @@
-const courses = [
+import { type DataType } from "@courses/CoursesList";
+
+const courses: DataType[] = [
   {
     id: "hYXnrJW6G",
     date: "2018-12-12T10:00:00.000Z",
