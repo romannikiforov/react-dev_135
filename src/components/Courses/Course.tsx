@@ -10,8 +10,6 @@ type CourseProps = {
 }
 
 const Course = memo(({ item, isOpen, toggle }: CourseProps) => {
-  console.log('rerender', item.id)
-
   return (
     <div className="course-item">
       <h3>{item.title}</h3>
