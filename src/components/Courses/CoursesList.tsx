@@ -9,6 +9,11 @@ export type DataType = {
     title: string;
     anons: string;
 }
+export type CoursesProps = {
+    openId: string | null;
+    toggle: (id: string | null) => void
+}
+
 
 
 const CoursesList = () => {

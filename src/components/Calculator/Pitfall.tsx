@@ -13,12 +13,28 @@ const Pitfall = () => {
 
     return (
         <>
-            <button onClick={f => f} className="btn-default">Add Tag</button>
+            <button onClick={() => setItems(items => ({
+                ...items,
+                tags: [
+                    ...items.tags,
+                    {
+                        id: Date.now(),
+                        value: `New value - ${items.tags.length + 1}`,
+                        addSomethigNew: "Hello !!!"
+                    }
+                ]
+
+            }))}
+
+                className="btn-default">Add Tag</button>
 
             <ul>
                 {items.tags.map(t => <li
                     style={{ color: t.id === items.selectedTag ? "red" : '' }}
-                    onClick={f => f}
+                    onClick={() => setItems(items => ({
+                        ...items,
+                        selectedtag: t.id
+                    }))}
                     key={t.id}>{t.value}</li >)
                 }
             </ul>
