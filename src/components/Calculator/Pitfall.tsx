@@ -5,6 +5,8 @@ type State = {
     tags: { id: number; value: string }[]
 }
 
+
+
 const Pitfall = () => {
     const [items, setItems] = useState<State>({
         tags: [],
@@ -13,14 +15,14 @@ const Pitfall = () => {
 
     return (
         <>
-            <button onClick={() => setItems(items => ({
+            <button onClick={() => setItems((items): State => ({
                 ...items,
                 tags: [
                     ...items.tags,
                     {
                         id: Date.now(),
                         value: `New value - ${items.tags.length + 1}`,
-                        addSomethigNew: "Hello !!!"
+
                     }
                 ]
 
@@ -31,9 +33,9 @@ const Pitfall = () => {
             <ul>
                 {items.tags.map(t => <li
                     style={{ color: t.id === items.selectedTag ? "red" : '' }}
-                    onClick={() => setItems(items => ({
+                    onClick={() => setItems((items): State => ({
                         ...items,
-                        selectedtag: t.id
+                        selectedTag: t.id
                     }))}
                     key={t.id}>{t.value}</li >)
                 }
