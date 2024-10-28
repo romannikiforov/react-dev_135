@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import withToggle from '@/hoc/withToggle'
 import Course from '@courses/Course'
 import '@courses/courses.scss'
 import data from '@courses/data'
@@ -9,36 +9,27 @@ export type DataType = {
     title: string;
     anons: string;
 }
-type CoursesState = {
+
+export type CoursesProps = {
     openId: string | null;
+    toggle: (id: string | null) => void;
 }
 
 
-class CoursesList extends Component<object, CoursesState> {
-    state = {
-        openId: null
-    }
+const CoursesList = withToggle(({ toggle, openId }: CoursesProps) => {
+    return (
+        <> <h1>Courses</h1>
+            <div className="courses-list" >
+                {data.map((item: DataType) => <Course key={item.id} item={item}
+                    isOpen={openId === item.id}
+                    toggle={toggle}
 
-    toggle = (id: string | null) => this.setState(({ openId }) => ({
-        openId: openId === id ? null : id
-    }))
+                />)}
+            </div>
+        </>
 
+    )
+})
 
-    render() {
-        const { openId } = this.state;
-        return (
-            <> <h1>Courses</h1>
-                <div className="courses-list" >
-                    {data.map((item: DataType) => <Course key={item.id} item={item}
-                        isOpen={openId === item.id}
-                        toggle={this.toggle}
-
-                    />)}
-                </div>
-            </>
-
-        )
-    }
-}
 
 export default CoursesList
