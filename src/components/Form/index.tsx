@@ -1,22 +1,26 @@
+import { WrapForm, FormGroup, Label, Input, ButtonGroup, Button } from '@/styles/app'
+
+
 const Form = () => {
 
   const handleSubmit = () => {
     //todo
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input name="email" />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input name="password" />
-      </div>
-      <div>
-        <button type="submit">Login</button>
-      </div>
-    </form>
+    <WrapForm onSubmit={handleSubmit}>
+      <FormGroup>
+        <Label htmlFor="email">Email</Label>
+        <Input name="email" />
+      </FormGroup>
+      <FormGroup>
+        <Label htmlFor="password">Password</Label>
+        <Input name="password" />
+      </FormGroup>
+      <ButtonGroup>
+        <Button type="submit" mr="0.5rem">Login</Button>
+        <Button type="reset">Reset</Button>
+      </ButtonGroup>
+    </WrapForm>
   );
 };
 

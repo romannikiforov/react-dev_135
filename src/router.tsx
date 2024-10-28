@@ -4,6 +4,8 @@ import CoursesList from '@courses/CoursesList'
 import Shapes from '@/components/Shapes'
 import Form from '@/components/Form';
 import Pitfall from "@/components/Calculator/Pitfall";
+import { WrapDiv } from '@/styles/app'
+
 
 
 export const router = createBrowserRouter([
@@ -22,7 +24,7 @@ export const router = createBrowserRouter([
 
 function NavLayout() {
     return (
-        <div className="container mx-auto">
+        <WrapDiv>
             <nav className="nav">
                 <NavLink className="nav__item" to="/">
                     Calculator
@@ -42,6 +44,6 @@ function NavLayout() {
                 </NavLink>
             </nav>
             <Outlet />
-        </div>
+        </WrapDiv>
     )
 }
