@@ -1,0 +1,25 @@
+.form {
+  max-width: 400px;
+  padding-block: 1rem;
+}
+.form-group {
+  margin-bottom: 1rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  input {
+    padding: 4px 12px;
+    border: 1px solid navy;
+    margin-bottom: 0.4rem;
+    &:focus {
+      outline: none;
+    }
+
+    & + span {
+      color: #bb077f;
+      display: block;
+    }
+  }
+}

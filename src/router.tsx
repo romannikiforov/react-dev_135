@@ -3,6 +3,7 @@ import Calculator from '@/components/Calculator'
 import CoursesList from '@courses/CoursesList'
 import Shapes from '@/components/Shapes'
 import Form from '@/components/Form';
+import FormValidate from '@/components/Form/FormValidate';
 import Pitfall from "@/components/Calculator/Pitfall";
 import { WrapDiv } from '@/styles/app'
 
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
             { path: "/pitfall", element: <Pitfall /> },
             { path: "/shapes", element: <Shapes /> },
             { path: "/form", element: <Form /> },
+            { path: "/form-validate", element: <FormValidate /> },
         ]
     }
 ])
@@ -41,6 +43,9 @@ function NavLayout() {
                 </NavLink>
                 <NavLink className="nav__item" to="/form">
                     Form
+                </NavLink>
+                <NavLink className="nav__item" to="/form-validate">
+                    Form validate
                 </NavLink>
             </nav>
             <Outlet />

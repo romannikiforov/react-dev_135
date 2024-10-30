@@ -1,6 +1,4 @@
 export const red = "red";
-export const green = "green";
-export const gray = "gray";
 export const lightGray = "lightgray";
 export const white = "#ffffff";
 export const text = "#434449";
