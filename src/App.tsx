@@ -1,7 +1,8 @@
-
 import TasksList from "@/todo/TasksList";
 import TaskInfo from "@/todo/TaskInfo";
 import TaskForm from "@/todo/TaskForm";
+import tasks from '@/data'
+
 
 function App() {
   return (
@@ -11,10 +12,10 @@ function App() {
 
       <div className="todo-grid">
         <div className="p-2">
-          <TasksList />
+          <TasksList tasks={tasks} />
         </div>
         <div className="p-2">
-          <TaskInfo />
+          <TaskInfo tasks={tasks} />
 
           <hr className="hr-block" />
           <TaskForm />

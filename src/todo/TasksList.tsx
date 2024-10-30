@@ -1,14 +1,15 @@
 import TaskFilter from '@/todo/TaskFilter'
 import Task from '@/todo/Task'
+import { TasksType } from '@/types'
 
-const TasksList = () => {
+
+
+const TasksList = ({ tasks }: TasksType) => {
     return (
         <>
             <TaskFilter />
             <ul className="mb-5">
-                <Task />
-                <Task />
-                <Task />
+                {tasks.map(task => <Task key={task.id} task={task} />)}
 
             </ul>
         </>

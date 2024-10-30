@@ -1,13 +1,24 @@
 import { FaTrash, FaCheck, FaSave } from "react-icons/fa";
+import { TaskItemType } from '@/types'
 
-const Task = () => {
+type TaskProps = {
+    task: TaskItemType
+}
+
+const Task = ({ task }: TaskProps) => {
+
+    let spanCls = "";
+    if (task.done) {
+        spanCls += "text-red-800 line-through"
+    }
+
     return (
 
         <li className="item-list">
-            <span>Task one</span>
+            <span className={spanCls}> {task.title}</span>
             <div className="ml-auto flex">
                 <div className="mr-4">
-                    <FaCheck className="cursor-pointer" />
+                    <FaCheck style={{ color: task.done ? "orange" : "green" }} className="cursor-pointer" />
                 </div>
                 <div>
                     <FaTrash className="cursor-pointer" />
