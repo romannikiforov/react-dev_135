@@ -1,16 +1,22 @@
 import { useForm, FieldValues } from 'react-hook-form'
-
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod';
 import '@/components/Form/form-validate.scss'
 
-type FormData = {
-  email: string;
-  password: string;
-}
+const schema = z.object({
+  email: z.string().min(1, { message: "email is required" }).email(),
+  password: z.string().min(1, { message: "password is required" }).min(1).max(5)
+})
+
+
+type FormData = z.infer<typeof schema>
 
 
 const FormValidate = () => {
 
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const { register, handleSubmit, formState: { errors, isValid } } = useForm<FormData>({
+    resolver: zodResolver(schema)
+  });
 
   const onSubmit = (data: FieldValues) => {
     console.log("Data: ", data)
@@ -21,17 +27,16 @@ const FormValidate = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-group">
         <label htmlFor="email">Email</label>
-        <input  {...register('email', { required: true, minLength: 2, maxLength: 5 })} />
-        {errors?.email?.type === "required" && <span>Email is required</span>}
-        {errors?.email?.type === "minLength" && <span>email must be more  2 characters</span>}
-        {errors?.email?.type === "maxLength" && <span>email must be less 5 characters</span>}
+        <input  {...register('email')} />
+        {errors?.email && <span>{errors.email.message}</span>}
+
       </div>
       <div className="form-group">
         <label htmlFor="password">Password</label>
         <input {...register('password', { required: true })} />
-        {errors?.password?.type === "required" && <span>Password is required</span>}
+        {errors?.password && <span>{errors.password.message}</span>}
       </div>
-      <button className="btn btn-primary" type="submit">Click me</button>
+      <button disabled={!isValid} className="btn btn-primary" type="submit">Click me</button>
     </form>
   );
 };
