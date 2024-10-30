@@ -11,11 +11,11 @@ git checkout -b 01_todos
 ======================= 👩‍🎓 ЗАВДАННЯ СЛУХАЧАМ 
 Розділити монолітний файл App.jsx на компоненти
 
-TasksList.jsx
-Task.jsx
-TaskForm.jsx
-TaskFilter.jsx
-TaskInfo.jsx
+TasksList.tsx
+Task.tsx
+TaskForm.tsx
+TaskFilter.tsx
+TaskInfo.tsx
 
 ==================================================================
 
@@ -39,3 +39,46 @@ https://fkhadra.github.io/react-toastify/positioning-toast
 
 ==============📣 8. update tasks 
 
+
+<ul className="mb-5">
+            <li className="item-list">
+              <span>Task one</span>
+              <div className="ml-auto flex">
+                <div className="mr-4">
+                  <FaCheck className="cursor-pointer" />
+                </div>
+                <div>
+                  <FaTrash className="cursor-pointer" />
+                </div>
+              </div>
+            </li>
+
+            <li className="item-list">
+              <span className="text-red-800 line-through">Done task</span>
+              <div className="ml-auto flex">
+                <div className="mr-4">
+                  <FaCheck className="cursor-pointer" />
+                </div>
+                <div>
+                  <FaTrash className="cursor-pointer" />
+                </div>
+              </div>
+            </li>
+
+            <li className="item-list">
+              <div className="mr-4">
+                <input className="item-list-input" type="text" value="task 2" />
+              </div>
+              <div className="ml-auto flex">
+                <div className="mr-4">
+                  <FaSave className="cursor-pointer" />
+                </div>
+                <div className="mr-4 cursor-pointer">
+                  <FaCheck />
+                </div>
+                <div>
+                  <FaTrash className="cursor-pointer" />
+                </div>
+              </div>
+            </li>
+          </ul>
