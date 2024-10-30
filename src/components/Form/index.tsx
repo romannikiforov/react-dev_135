@@ -11,15 +11,13 @@ const Form = () => {
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    const data = { email: '', password: '' }
-    if (emailRef.current) {
-      data.email = emailRef.current.value;
-    }
-    if (passwordRef.current) {
-      data.password = passwordRef.current.value;
-    }
+
+    const formData = new FormData(e.currentTarget)
+
+
     setLoading(true);
     await new Promise(r => setTimeout(r, 3000));
+    const data = Object.fromEntries(formData)
     console.log(data)
     setLoading(false);
     if (emailRef.current) {
@@ -28,6 +26,8 @@ const Form = () => {
     if (passwordRef.current) {
       passwordRef.current.value = '';
     }
+
+
   };
 
   const resetHandle: React.MouseEventHandler<HTMLButtonElement> = e => {
