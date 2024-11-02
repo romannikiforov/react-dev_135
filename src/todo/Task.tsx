@@ -2,10 +2,12 @@ import { FaTrash, FaCheck, FaSave } from "react-icons/fa";
 import { TaskItemType } from '@/types'
 
 type TaskProps = {
-    task: TaskItemType
+    task: TaskItemType,
+    toggleTask: (id: string) => void,
+    removeTask: (id: string) => void,
 }
 
-const Task = ({ task }: TaskProps) => {
+const Task = ({ task, toggleTask, removeTask }: TaskProps) => {
 
     let spanCls = "";
     if (task.done) {
@@ -17,11 +19,11 @@ const Task = ({ task }: TaskProps) => {
         <li className="item-list">
             <span className={spanCls}> {task.title}</span>
             <div className="ml-auto flex">
-                <div className="mr-4">
+                <div onClick={() => toggleTask(task.id)} className="mr-4">
                     <FaCheck style={{ color: task.done ? "orange" : "green" }} className="cursor-pointer" />
                 </div>
                 <div>
-                    <FaTrash className="cursor-pointer" />
+                    <FaTrash onClick={() => removeTask(task.id)} className="cursor-pointer" />
                 </div>
             </div>
         </li>

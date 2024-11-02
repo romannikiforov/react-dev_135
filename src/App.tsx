@@ -10,6 +10,15 @@ function App() {
 
   const addTask = (task: TaskItemType) => setTasks(x => [...x, task])
 
+  const toggleTask = (id: string) => setTasks(tasks => tasks.map(t => t.id === id ? { ...t, done: !t.done } : t))
+
+  const removeTask = (id: string) => {
+    if (!confirm("Are you sure ? ")) {
+      return;
+    }
+    setTasks(tasks => tasks.filter(t => t.id !== id))
+  }
+
   return (
     <section className="w-[1200px] mx-auto">
       <h3 className="title">List of tasks</h3>
@@ -17,7 +26,10 @@ function App() {
 
       <div className="todo-grid">
         <div className="p-2">
-          <TasksList tasks={tasks} />
+          <TasksList tasks={tasks}
+            toggleTask={toggleTask}
+            removeTask={removeTask}
+          />
         </div>
         <div className="p-2">
           <TaskInfo tasks={tasks} />
