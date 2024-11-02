@@ -1,7 +1,37 @@
-import { useState } from "react";
+import { useEffect, useReducer } from "react";
+
+type State = {
+  count: number;
+  step: number;
+}
+
+type Action = {
+  type: "tick";
+} | {
+  type: "step";
+  step: number
+}
+
+function reducer(state: State, action: Action) {
+  switch (action.type) {
+    case "tick": return { ...state, count: state.count + state.step }
+    case "step": return { ...state, step: action.step }
+    default: throw Error('t;his is impossible')
+  }
+}
+
+const initialState = { count: 0, step: 1 }
 
 const Counter = () => {
-  const [count, setCount] = useState(0);
+  const [{ count, step }, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    const id = setInterval(() => dispatch({ type: "tick" }), 1000)
+    return () => {
+      clearInterval(id)
+    }
+  }, [])
+
 
   return (
     <>
@@ -9,8 +39,8 @@ const Counter = () => {
       <input
         className="counter-input"
         type="number"
-        value={1}
-        onChange={(f) => f}
+        value={step}
+        onChange={(e) => dispatch({ type: "step", step: +e.target.value })}
       />
     </>
   );
