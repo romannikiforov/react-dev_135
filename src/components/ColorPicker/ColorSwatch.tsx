@@ -1,4 +1,6 @@
-const ColorSwatch = ({ red, green, blue }) => {
+import { RGBColorType } from '@picker/reducer'
+
+const ColorSwatch = ({ red, green, blue }: RGBColorType) => {
   return (
     <div
       className="color-swatch"
