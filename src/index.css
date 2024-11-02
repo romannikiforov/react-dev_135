@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer components {
+  .custom-input {
+    @apply border-[1px] border-slate-800 px-2 py-1 w-full focus:outline-none focus:border-red-600;
+  }
   .title {
     @apply text-center mb-4 text-4xl;
   }

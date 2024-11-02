@@ -21,6 +21,10 @@ function App() {
     setTasks(tasks => tasks.filter(t => t.id !== id))
   }
 
+  const updateTask = async (id: string, title: string) => {
+    setTasks(tasks => tasks.map(t => t.id === id ? { ...t, title } : t))
+  }
+
   return (
     <section className="w-[1200px] mx-auto">
       <h3 className="title">List of tasks</h3>
@@ -31,6 +35,7 @@ function App() {
           <TasksList tasks={tasks}
             toggleTask={toggleTask}
             removeTask={removeTask}
+            updateTask={updateTask}
           />
         </div>
         <div className="p-2">
