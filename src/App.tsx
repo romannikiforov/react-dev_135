@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import TasksList from "@/todo/TasksList";
 import TaskInfo from "@/todo/TaskInfo";
 import TaskForm from "@/todo/TaskForm";
@@ -8,11 +10,11 @@ import { TaskItemType } from '@/types'
 function App() {
   const [tasks, setTasks] = useState<TaskItemType[]>([])
 
-  const addTask = (task: TaskItemType) => setTasks(x => [...x, task])
+  const addTask = async (task: TaskItemType) => setTasks(x => [...x, task])
 
   const toggleTask = (id: string) => setTasks(tasks => tasks.map(t => t.id === id ? { ...t, done: !t.done } : t))
 
-  const removeTask = (id: string) => {
+  const removeTask = async (id: string) => {
     if (!confirm("Are you sure ? ")) {
       return;
     }
@@ -38,6 +40,9 @@ function App() {
           <TaskForm addTask={addTask} />
         </div>
       </div>
+
+
+      <ToastContainer autoClose={2000} />
     </section>
   );
 }

@@ -6,7 +6,7 @@ import { TaskItemType } from '@/types'
 type TasksListProps = {
     tasks: TaskItemType[],
     toggleTask: (id: string) => void,
-    removeTask: (id: string) => void,
+    removeTask: (id: string) => Promise<void>,
 }
 
 

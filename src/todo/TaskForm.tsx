@@ -1,9 +1,10 @@
 import { useRef } from 'react'
+import { toast } from 'react-toastify'
 import { v4 } from 'uuid'
 import { TaskItemType } from '@/types'
 
 type TaskFormProps = {
-    addTask: (task: TaskItemType) => void
+    addTask: (task: TaskItemType) => Promise<void>
 }
 
 const TaskForm = ({ addTask }: TaskFormProps) => {
@@ -11,15 +12,18 @@ const TaskForm = ({ addTask }: TaskFormProps) => {
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
+
         const inputEl = inputRef.current;
 
-        if (!inputEl?.value) {
-            alert("Enter task");
+        if (!inputEl?.value.trim()) {
+            toast.warn("Input tasks's title is empty")
             return;
         }
         const task = { id: v4(), title: inputEl.value, done: false }
-        addTask(task)
-        inputEl.value = '';
+        addTask(task).then(() => {
+            toast.success('Task has been added successfully')
+            inputEl.value = '';
+        })
 
     }
 
