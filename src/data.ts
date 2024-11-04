@@ -1,6 +1,7 @@
 import { v4 } from "uuid";
+import { State } from "@/App";
 
-export const defaultState = [
+export const defaultState: State[] = [
   { value: "Pants", id: v4(), packed: false },
   { value: "Jacket", id: v4(), packed: false },
   { value: "iPhone Charger", id: v4(), packed: false },

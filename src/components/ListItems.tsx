@@ -1,7 +1,15 @@
 import Item from "@/components/Item";
 import Filter from "@/components/Filter";
 
-const ListItems = ({ title, items }: any) => {
+import { State } from '@/App'
+
+type ListItemsProps = {
+  items: State[];
+  title: string;
+  removeItem: (id: string) => void;
+}
+
+const ListItems = ({ title, items, removeItem }: ListItemsProps) => {
   const updateFilter = (searchTerm: any) => {
     // todo
   };
@@ -9,9 +17,12 @@ const ListItems = ({ title, items }: any) => {
   return (
     <section>
       <h3 className="mb-3">Title</h3>
-      <Filter filter={""} onChange={updateFilter} />
+      <Filter filter={title} onChange={updateFilter} />
+
       <ul className="mb-3 p-0">
-        <Item item={[]} />
+        {items?.map(item => <Item key={item.id} item={item}
+          removeItem={removeItem}
+        />)}
       </ul>
     </section>
   );
