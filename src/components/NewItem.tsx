@@ -1,12 +1,11 @@
 import React from 'react'
 import { v4 } from "uuid";
 import { State } from '@/App'
+import { useAddItem } from '@/components/hooks'
 
-type NewItemProps = {
-  addItem: (newItem: State) => void
-}
 
-const NewItem = ({ addItem }: NewItemProps) => {
+const NewItem = () => {
+  const addItem = useAddItem();
 
   const inputRef = React.useRef<HTMLInputElement>(null)
 

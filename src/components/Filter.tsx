@@ -1,7 +1,13 @@
-const Filter = ({ filter }: any) => {
+
+type FilterProps = {
+  value: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>
+}
+
+const Filter = ({ value, onChange }: FilterProps) => {
   return (
     <div className="mb-3">
-      <input type="text" className="form-control" />
+      <input onChange={onChange} value={value} type="text" className="form-control" />
     </div>
   );
 };

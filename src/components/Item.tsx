@@ -1,13 +1,20 @@
+import { memo, useContext } from 'react'
 import "./item.css";
 import { State } from '@/App'
+import { useDeleteItem, useToggleChecked } from '@/components/hooks'
+
 
 type ItemProps = {
   item: State;
-  removeItem: (id: string) => void;
+
 }
 
 
-const Item = ({ item, removeItem }: ItemProps) => {
+const Item = memo(({ item }: ItemProps) => {
+  console.log("rendered", item.id)
+  const toggleItem = useToggleChecked();
+  const removeItem = useDeleteItem();
+
   return (
     <li className="item-box">
       <div className="form-check">
@@ -15,7 +22,7 @@ const Item = ({ item, removeItem }: ItemProps) => {
           className="form-check-input"
           type="checkbox"
           checked={item.packed}
-          onChange={() => { }}
+          onChange={() => toggleItem(item.id)}
           id={item.id}
         />
         <label className="form-check-label" htmlFor={item.id}>
@@ -28,6 +35,6 @@ const Item = ({ item, removeItem }: ItemProps) => {
       </button>
     </li>
   );
-};
+});
 
 export default Item;
