@@ -8,7 +8,7 @@ export type Action = {
     payload: number;
 }
 
-const reducer = (state: RGBColorType, action: Action) => {
+export const reducer = (state: RGBColorType, action: Action) => {
     switch (action.type) {
         case "adjust_red": return { ...state, red: action.payload };
         case "adjust_green": return { ...state, green: action.payload }

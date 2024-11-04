@@ -1,6 +1,9 @@
-import { RGBColorType } from '@picker/reducer'
+import React from 'react'
+import RGBContext from "@picker/context";
 
-const ColorSwatch = ({ red, green, blue }: RGBColorType) => {
+const ColorSwatch = () => {
+  const { red, green, blue } = React.useContext(RGBContext)
+
   return (
     <div
       className="color-swatch"

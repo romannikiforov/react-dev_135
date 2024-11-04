@@ -1,13 +1,11 @@
 import React from "react";
 import ColorSlider from "@picker/ColorSlider";
-import { RGBColorType, Action } from '@picker/reducer'
-
-export type ColorsSliderProps = {
-  dispatch: React.Dispatch<Action>
-} & RGBColorType;
+import RGBContext from "@picker/context";
 
 
-const ColorSliders = ({ red, green, blue, dispatch }: ColorsSliderProps) => {
+const ColorSliders = () => {
+  const { red, green, blue, dispatch } = React.useContext(RGBContext)
+
 
   const adjustRed: React.ChangeEventHandler<HTMLInputElement> = e => dispatch({
     type: "adjust_red",

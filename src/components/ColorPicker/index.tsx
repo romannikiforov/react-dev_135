@@ -4,9 +4,10 @@ import ThemeContext from '@picker/themeContext'
 
 import '@picker/index.scss'
 import ColorSwatch from "@picker/ColorSwatch";
-import ColorInputs from "@picker/ColorInputs";
-import ColorSliders from "@picker/ColorSliders";
 
+import ColorAdjustment from '@picker/ColorAdjastment'
+import ColorInput from '@picker/ColorInput'
+import ColorSlider from '@picker/ColorSlider'
 
 export const toRGB = ({ red, green, blue }: RGBColorType) => {
   return `rgb(${red}, ${green}, ${blue})`;
@@ -19,15 +20,15 @@ const initialRGB = {
 };
 
 const ColorPicker = () => {
-  const [rgb, dispatch] = useReducer(reducer, initialRGB);
+  const [rgb] = useReducer(reducer, initialRGB);
 
   const themes = useContext(ThemeContext)
 
   return (
     <div className="picker-container" style={{ borderColor: toRGB(rgb), ...themes.lightMode }}>
-      <ColorSwatch {...rgb} />
-      <ColorInputs dispatch={dispatch} {...rgb} />
-      <ColorSliders dispatch={dispatch} {...rgb} />
+      <ColorSwatch />
+      <ColorAdjustment Adjustment={ColorInput} />
+      <ColorAdjustment Adjustment={ColorSlider} />
     </div>
   );
 };
