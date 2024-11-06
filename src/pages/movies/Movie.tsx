@@ -1,8 +1,17 @@
+import { MovieItem, MovieTitle } from '@styles/app'
+import { MovieType } from '@movies/types'
 
 
-const Movie = () => {
+type MovieProps = {
+    item: MovieType
+}
+
+const Movie = ({ item }: MovieProps) => {
     return (
-        <div>Movie</div>
+        <MovieItem>
+            <MovieTitle fs="18px" color="purple">{item.title}</MovieTitle>
+
+        </MovieItem>
     )
 }
 

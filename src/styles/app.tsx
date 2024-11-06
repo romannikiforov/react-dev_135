@@ -2,6 +2,7 @@ import styled from '@emotion/styled/macro';
 import { keyframes } from '@emotion/react'
 import { FaSpinner } from 'react-icons/fa';
 
+
 const spin = keyframes({
     "0%": { transform: "rotate(0deg)" },
     "100%": { transform: "rotate(360deg)" }
@@ -48,8 +49,24 @@ export const MovieItem = styled.div({
     boxShadow: "0 0 8px rgba(0,0,0,.4)"
 })
 
-export const MovieTitle = styled.h2({
+
+type MovieTitleType = {
+    fs?: string;
+    fw?: number;
+    color?: string;
+}
+
+
+export const MovieTitle = styled.h2<MovieTitleType>({
     marginTop: 0,
     marginBottom: "1rem",
-    fontWeight: 400,
-})
+
+},
+    ({ fs = "1.2rem", fw = 500 }) => ({
+        fontWeight: fw,
+        fontSize: fs
+    }),
+    ({ color = "black" }) => ({
+        color: color
+    })
+)
