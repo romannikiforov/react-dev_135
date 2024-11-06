@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { MovieResponseType, MovieConfigType } from '@movies/types'
 import Movie from '@movies/Movie'
-import { MovieList, Pagination } from '@styles/app'
-
+import { MovieList } from '@styles/app'
+import Pagination from '@/components/Pagination'
 
 const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=65e043c24785898be00b4abc12fcdaae&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false`;
 const CONFIG_URL = `https://api.themoviedb.org/3/configuration?api_key=65e043c24785898be00b4abc12fcdaae`;
@@ -18,15 +18,19 @@ export const MoviesList = () => {
     const [movies, setMovies] = useState<MovieResponseType>();
     const [config, setConfig] = useState<MovieConfigType | null>(null)
     const [page, setPage] = useState(1)
+    const [loading, setLoading] = useState(false)
 
 
     useEffect(() => {
         async function getMovies() {
+            setLoading(true);
             try {
                 const movies = await fetchMovies(page);
                 setMovies(movies)
             } catch (e) {
                 console.log(e)
+            } finally {
+                setLoading(false)
             }
         }
         getMovies();
@@ -50,16 +54,8 @@ export const MoviesList = () => {
 
     return (
         <>
-            <div className={Pagination}>
-                <span className='p-title'>
-                    Page: <span className='p-page'>{page}</span>
-                </span>
-                <button onClick={() => setPage(1)} disabled={page <= 1} className="button">First page</button>
-                <button onClick={() => setPage(p => p - 1)} disabled={page <= 1} className="button">Prev</button>
-                <button onClick={() => setPage(p => p + 1)} disabled={page >= 500} className="button">Next</button>
-                <button onClick={() => setPage(500)} disabled={page >= 500} className="button">Last Page</button>
+            <Pagination page={page} setPage={setPage} loading={loading} />
 
-            </div>
             <MovieList>
                 {config && movies && movies.results && movies.results.map(m => <Movie key={m.id} item={m} config={config} />)}
             </MovieList>
