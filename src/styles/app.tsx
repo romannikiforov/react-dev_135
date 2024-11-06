@@ -1,4 +1,5 @@
 import styled from '@emotion/styled/macro';
+import { css } from '@emotion/css'
 import { keyframes } from '@emotion/react'
 import { FaSpinner } from 'react-icons/fa';
 
@@ -14,7 +15,7 @@ export const Spinner = styled(FaSpinner)({
 });
 
 export function FullSpinner() {
-    return <div css={{
+    return <div style={{
         fontSize: "4rem",
         height: "100vh",
         display: "flex",
@@ -77,4 +78,31 @@ export const MovieImg = styled.img({
     height: "250px",
     objectFit: "cover",
     marginBottom: "1rem",
-})
+});
+
+export const Pagination = css`
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+
+  .p-title {
+    margin-right: 1rem;
+  }
+  .p-page {
+    color: red;
+    font-weight: 500;
+  }
+  .button {
+    font-size: 1.1rem;
+    margin-right: 1rem;
+    padding: 8px 16px;
+    background-color: #56c;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+
+    &:disabled {
+      background-color: #d5d5d5;
+      color: black;
+    }
+  }
+`;
