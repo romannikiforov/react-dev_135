@@ -1,6 +1,8 @@
+import MoviesList from '@movies/MoviesList'
+
 function App() {
   return <div className="container">
-    <h1>Films</h1>
+    <MoviesList />
 
   </div>
 }
