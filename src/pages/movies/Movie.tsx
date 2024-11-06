@@ -1,16 +1,24 @@
-import { MovieItem, MovieTitle } from '@styles/app'
-import { MovieType } from '@movies/types'
+import { MovieItem, MovieTitle, MovieImg } from '@styles/app'
+import { MovieType, MovieConfigType } from '@movies/types'
 
 
 type MovieProps = {
-    item: MovieType
+    item: MovieType;
+    config: MovieConfigType
 }
 
-const Movie = ({ item }: MovieProps) => {
+const Movie = ({ item, config }: MovieProps) => {
     return (
         <MovieItem>
-            <MovieTitle fs="18px" color="purple">{item.title}</MovieTitle>
-
+            {config.images?.base_url && (
+                <>
+                    <MovieImg src={config.images.base_url + 'w500' + item.poster_path}
+                        alt={item.title + "poster"}
+                    />
+                    <MovieTitle fs="18px" color="purple">{item.title}</MovieTitle>
+                </>
+            )
+            }
         </MovieItem>
     )
 }

@@ -70,3 +70,11 @@ export const MovieTitle = styled.h2<MovieTitleType>({
         color: color
     })
 )
+
+export const MovieImg = styled.img({
+    width: "100%",
+    maxWidth: "100%",
+    height: "250px",
+    objectFit: "cover",
+    marginBottom: "1rem",
+})

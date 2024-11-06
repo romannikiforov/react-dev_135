@@ -10,3 +10,9 @@ export type MovieResponseType = {
   total_pages: number;
   total_results: number;
 };
+
+export type MovieConfigType = {
+  images: {
+    base_url: string;
+  };
+};

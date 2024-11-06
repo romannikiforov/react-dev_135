@@ -59,6 +59,9 @@ MovieTitle
 
 
 ==============📣 3. layout and images
+base_url, file_size 
+file_path
+
 https://developer.themoviedb.org/docs/image-basics
 https://developer.themoviedb.org/reference/configuration-details
 
