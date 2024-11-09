@@ -1,66 +1,54 @@
 import { useState, useEffect } from 'react'
 import { MovieResponseType, MovieConfigType } from '@movies/types'
 import Movie from '@movies/Movie'
-import { MovieList } from '@styles/app'
+import { FullSpinner, MovieList } from '@styles/app'
 import Pagination from '@/components/Pagination'
+import { fetchData } from '@/api'
 
-const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=65e043c24785898be00b4abc12fcdaae&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false`;
-const CONFIG_URL = `https://api.themoviedb.org/3/configuration?api_key=65e043c24785898be00b4abc12fcdaae`;
+let API_URL = `discover/movie?language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false`;
 
-const fetchMovies = async (page: number) => {
-    const res = await fetch(API_URL + `&page=${page}`);
-    const data: MovieResponseType = await res.json();
-    return data;
+type MoviesListProps = {
+    config: MovieConfigType
 }
 
 
-export const MoviesList = () => {
+export const MoviesList = ({ config }: MoviesListProps) => {
     const [movies, setMovies] = useState<MovieResponseType>();
-    const [config, setConfig] = useState<MovieConfigType | null>(null)
     const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
 
 
     useEffect(() => {
         async function getMovies() {
             setLoading(true);
-            try {
-                const movies = await fetchMovies(page);
-                setMovies(movies)
-            } catch (e) {
-                console.log(e)
-            } finally {
-                setLoading(false)
+            const [result, data] = await fetchData<MovieResponseType>(API_URL, `page=${page}`);
+            if (result === "success") {
+                setMovies(data)
+            } else {
+                setError(data)
             }
+            setLoading(false)
+
         }
         getMovies();
     }, [page])
 
 
-    const getConfig = async () => {
-        try {
-            const res = await fetch(CONFIG_URL);
-            const config: MovieConfigType = await res.json();
-            setConfig(config)
-            console.log(config)
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    useEffect(() => {
-        getConfig();
-    }, [])
 
     return (
         <>
-            <Pagination page={page} setPage={setPage} loading={loading} />
+            {loading && <FullSpinner />}
+            {error ? "<h1>Error occurred</h1>" : <>
 
-            <MovieList>
-                {config && movies && movies.results && movies.results.map(m => <Movie key={m.id} item={m} config={config} />)}
-            </MovieList>
+                <Pagination page={page} setPage={setPage} loading={loading} />
+
+                <MovieList>
+                    {config && movies && movies.results && movies.results.map(m => <Movie key={m.id} item={m} config={config} />)}
+                </MovieList>
+            </>
+            }
         </>
-
     )
 }
 

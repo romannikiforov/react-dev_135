@@ -140,7 +140,8 @@ https://github.com/remix-run/react-router/tree/dev/examples/lazy-loading-router-
 
 https://developers.themoviedb.org/3/movies/get-movie-details
 
-https://api.themoviedb.org/3/movie/{movie_id}?api_key=65e043c24785898be00b4abc12fcdaae&language=en-US
+movie/{mhttps://api.themoviedb.org/3/ovie_id}?api_key=65e043c24785898be00b4abc12fcdaae&language=en-US
+https://api.themoviedb.org/3/movie/1034541?api_key=65e043c24785898be00b4abc12fcdaae&language=en-US
 
 ////  ------------- 🖍 styles 
 MovieDetailsWrap

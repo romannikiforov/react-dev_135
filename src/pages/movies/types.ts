@@ -16,3 +16,8 @@ export type MovieConfigType = {
     base_url: string;
   };
 };
+
+export type MovieGenreType = {
+  id: number;
+  name: string;
+};

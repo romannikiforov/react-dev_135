@@ -106,3 +106,21 @@ export const Pagination = css`
     }
   }
 `;
+
+export const MovieDetailsWrap = styled.div`
+ display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 1rem;
+`
+
+export const GenreLink = css`
+  display: block;
+  margin-bottom: 0.5rem;
+  color: red;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+`
