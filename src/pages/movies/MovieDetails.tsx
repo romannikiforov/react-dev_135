@@ -1,52 +1,35 @@
-import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { MovieConfigType, MovieType, MovieGenreType } from '@movies/types'
+import { MovieConfigType, MovieDetailType } from '@movies/types'
 import { MovieImg, FullSpinner, MovieTitle, MovieDetailsWrap, GenreLink } from '@/styles/app'
-import { fetchData } from '@/api'
+import { useQuery } from '@tanstack/react-query'
+import axios from 'axios'
+
+const key = import.meta.env.VITE_MOVIE_API
+let URL = `https://api.themoviedb.org/3/`
+
 
 type MovieDetailsProps = {
     config: MovieConfigType
 }
 
-type MovideDetailType = {
-    genres: MovieGenreType[],
-    overview: string;
-} & MovieType;
-
-
 const MovieDetails = ({ config }: MovieDetailsProps) => {
-    const [movie, setMovie] = useState<MovideDetailType>();
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
-
     const { id } = useParams();
 
-    useEffect(() => {
-        async function getMovie() {
-            if (!id) {
-                setError('wrong id');
-                return;
-            }
-            const URL = `movie/${id}?language=en-US`;
-            setLoading(true)
-            const [result, movie] = await fetchData<MovideDetailType>(URL)
-            if (result === "success") {
-                setMovie(movie)
-            } else {
-                setError(movie)
-            }
-            setLoading(false)
+    URL = URL + `movie/${id}?api_key=${key}&language=en-US`;
+
+    const { data: movie, isPending, isError } = useQuery({
+        queryKey: ['movie', `movie_${id}`],
+        queryFn: async () => {
+            await new Promise(r => setTimeout(r, 3000));
+            return axios.get(URL).then(r => r.data)
         }
-        getMovie();
+    });
 
-    }, [id])
-
-    console.log(movie)
 
     return (
         <>
-            {loading && <FullSpinner />}
-            {error ? <h1>{error}</h1> :
+            {isPending && <FullSpinner />}
+            {isError ? <h1>Error</h1> :
                 <>
                     <MovieDetailsWrap>
                         {movie && config && config.images?.base_url && (
