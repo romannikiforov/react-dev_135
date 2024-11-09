@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { MovieResponseType, MovieConfigType } from '@movies/types'
 import Movie from '@movies/Movie'
-import { FullSpinner, MovieList } from '@styles/app'
+import { FullSpinner, MovieList, WrapTitle } from '@styles/app'
 import Pagination from '@/components/Pagination'
 import { fetchData } from '@/api'
 
@@ -42,7 +42,7 @@ export const MoviesList = ({ config }: MoviesListProps) => {
             {error ? "<h1>Error occurred</h1>" : <>
 
                 <Pagination page={page} setPage={setPage} loading={loading} />
-
+                <WrapTitle>Movies</WrapTitle>
                 <MovieList>
                     {config && movies && movies.results && movies.results.map(m => <Movie key={m.id} item={m} config={config} />)}
                 </MovieList>

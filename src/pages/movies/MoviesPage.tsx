@@ -5,6 +5,7 @@ import { WrapTitle } from '@styles/app'
 import MovieDetails from '@movies/MovieDetails'
 import { MovieConfigType } from '@movies/types'
 import { fetchData } from '@/api'
+import GenresList from '@movies/GenresList'
 
 const CONFIG_URL = "configuration?";
 
@@ -30,10 +31,11 @@ const MoviesPage = () => {
                 <h1>Something went wrong</h1>
                 : (
                     <>
-                        <WrapTitle>Movies</WrapTitle>
+
                         <Routes>
                             <Route path="list" element={<MoviesList config={config} />} />
                             <Route path="detail/:id" element={<MovieDetails config={config} />} />
+                            <Route path="genres/:id" element={<GenresList config={config} />} />
                         </Routes>
                     </>
                 )}

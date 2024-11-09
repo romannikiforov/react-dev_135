@@ -62,7 +62,7 @@ const MovieDetails = ({ config }: MovieDetailsProps) => {
                             <MovieTitle>{movie?.title}</MovieTitle>
                             <p className='mb-3'>{movie?.overview}</p>
                             {movie?.genres?.map(g => <Link
-                                to={`/movies/genres/${g.id}`}
+                                to={`/movies/genres/${g.id}?gname=${g.name}`}
                                 key={g.id}
                                 className={GenreLink}
                             >{g.name}</Link>)}

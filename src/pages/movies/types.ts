@@ -21,3 +21,7 @@ export type MovieGenreType = {
   id: number;
   name: string;
 };
+
+export type GenresResponseType = {
+  genres: MovieGenreType[];
+};
