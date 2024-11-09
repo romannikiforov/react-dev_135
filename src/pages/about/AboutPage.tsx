@@ -1,5 +1,5 @@
 
-export const Component = () => {
+const Component = () => {
     return (
         <>
             <h1>AboutPage</h1>
@@ -8,7 +8,5 @@ export const Component = () => {
         </>
     )
 }
-
-Component.displayName = "AboutPage"
 
 export default Component
